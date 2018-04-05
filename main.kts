@@ -17,12 +17,21 @@ fun whenFn(arg: Any): String {
 }
 
 // write an "add" function that takes two Ints, returns an Int, and adds the values
-val add = {int1: Int, int2: Int -> (int1 + int2)}
+// val add = {int1: Int, int2: Int -> (int1 + int2)}
+fun add (int1: Int, int2: Int): Int {
+    return int1 + int2
+}
 
 // write a "sub" function that takes two Ints, returns an Int, and subtracts the values
-val sub = {int1: Int, int2: Int -> (int1 - int2)}
+// val sub = {int1: Int, int2: Int -> (int1 - int2)}
+fun sub (int1: Int, int2: Int): Int {
+    return int1 - int2
+}
 
 // write a "mathOp" function that takes two Ints and a function (that takes two Ints and returns an Int), returns an Int, and applies the passed-in-function to the arguments
+fun mathOp (int1: Int, int2: Int, f: (Int, Int) -> Int): Int {
+    return f(int1, int2)
+}
 
 // write a class "Person" with first name, last name and age
 
@@ -70,13 +79,13 @@ for ( (k,v) in sub_tests) {
 }
 println("")
 
-//print("Op tests: ")
-//print(if (mathOp(2, 2, { l,r -> l+r} ) == 4) "." else "!")
-//print(if (mathOp(2, 2, ::add ) == 4) "." else "!")
-//print(if (mathOp(2, 2, ::sub ) == 0) "." else "!")
-//print(if (mathOp(2, 2, { l,r -> l*r} ) == 4) "." else "!")
-//println("")
-//
+print("Op tests: ")
+print(if (mathOp(2, 2, { l,r -> l+r} ) == 4) "." else "!")
+print(if (mathOp(2, 2, ::add ) == 4) "." else "!")
+print(if (mathOp(2, 2, ::sub ) == 0) "." else "!")
+print(if (mathOp(2, 2, { l,r -> l*r} ) == 4) "." else "!")
+println("")
+
 //
 //print("Person tests: ")
 //val p1 = Person("Ted", "Neward", 47)
