@@ -75,6 +75,11 @@ class Money(var amount: Int, var currency: String) {
         }
         return Money(amount, currency)
     }
+
+    operator fun plus(money2: Money): Money {
+        val money2Converted = money2.convert(this.currency)
+        return Money((this.amount + money2Converted.amount), this.currency)
+    }
 }
 
 // ============ DO NOT EDIT BELOW THIS LINE =============
@@ -151,13 +156,13 @@ val convert_tests = listOf(
 for ( (from,to) in convert_tests) {
     print(if (from.convert(to.currency).amount == to.amount) "." else "!")
 }
-//val moneyadd_tests = listOf(
-//        Pair(tenUSD, tenUSD) to Money(20, "USD"),
-//        Pair(tenUSD, fiveGBP) to Money(20, "USD"),
-//        Pair(fiveGBP, tenUSD) to Money(10, "GBP")
-//)
-//for ( (pair, result) in moneyadd_tests) {
-//    print(if ((pair.first + pair.second).amount == result.amount &&
-//            (pair.first + pair.second).currency == result.currency) "." else "!")
-//}
-//println("")
+val moneyadd_tests = listOf(
+        Pair(tenUSD, tenUSD) to Money(20, "USD"),
+        Pair(tenUSD, fiveGBP) to Money(20, "USD"),
+        Pair(fiveGBP, tenUSD) to Money(10, "GBP")
+)
+for ( (pair, result) in moneyadd_tests) {
+    print(if ((pair.first + pair.second).amount == result.amount &&
+            (pair.first + pair.second).currency == result.currency) "." else "!")
+}
+println("")
