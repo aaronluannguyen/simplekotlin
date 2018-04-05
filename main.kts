@@ -34,8 +34,48 @@ fun mathOp (int1: Int, int2: Int, f: (Int, Int) -> Int): Int {
 }
 
 // write a class "Person" with first name, last name and age
+class Person(var firstName: String, var lastName: String, var age: Int) {
+    val debugString: String by lazy {
+        "[Person firstName:$firstName lastName:$lastName age:$age]"
+    }
+}
 
 // write a class "Money"
+class Money(var amount: Int, var currency: String) {
+    fun convert (currTo: String): Money {
+        when (this.currency) {
+            "USD" -> {
+                when (currTo) {
+                    "EUR" -> return Money((amount * 3 / 2), "EUR")
+                    "CAN" -> return Money((amount * 5 / 4), "CAN")
+                    "GBP" -> return Money((amount / 2), "GBP")
+                }
+            }
+            "EUR" -> {
+                when (currTo) {
+                    "USD" -> return Money((amount * 2 / 3), "EUR")
+                    "CAN" -> return Money((amount * 5 / 6), "CAN")
+                    "GBP" -> return Money((amount / 3), "GBP")
+                }
+            }
+            "CAN" -> {
+                when (currTo) {
+                    "USD" -> return Money((amount * 4 / 5), "EUR")
+                    "EUR" -> return Money((amount * 6 / 5), "CAN")
+                    "GBP" -> return Money((amount * 2 / 5), "GBP")
+                }
+            }
+            "GBP" -> {
+                when (currTo) {
+                    "USD" -> return Money((amount * 2), "EUR")
+                    "EUR" -> return Money((amount * 3), "CAN")
+                    "CAN" -> return Money((amount * 5 / 2), "GBP")
+                }
+            }
+        }
+        return Money(amount, currency)
+    }
+}
 
 // ============ DO NOT EDIT BELOW THIS LINE =============
 
@@ -86,38 +126,38 @@ print(if (mathOp(2, 2, ::sub ) == 0) "." else "!")
 print(if (mathOp(2, 2, { l,r -> l*r} ) == 4) "." else "!")
 println("")
 
-//
-//print("Person tests: ")
-//val p1 = Person("Ted", "Neward", 47)
-//print(if (p1.firstName == "Ted") "." else "!")
-//p1.age = 48
-//print(if (p1.debugString == "[Person firstName:Ted lastName:Neward age:48]") "." else "!")
-//println("")
-//
-//print("Money tests: ")
-//val tenUSD = Money(10, "USD")
-//val twelveUSD = Money(12, "USD")
-//val fiveGBP = Money(5, "GBP")
-//val fifteenEUR = Money(15, "EUR")
-//val fifteenCAN = Money(15, "CAN")
-//val convert_tests = listOf(
-//    Pair(tenUSD, tenUSD),
-//    Pair(tenUSD, fiveGBP),
-//    Pair(tenUSD, fifteenEUR),
-//    Pair(twelveUSD, fifteenCAN),
-//    Pair(fiveGBP, tenUSD),
-//    Pair(fiveGBP, fifteenEUR)
-//)
-//for ( (from,to) in convert_tests) {
-//    print(if (from.convert(to.currency).amount == to.amount) "." else "!")
-//}
+
+print("Person tests: ")
+val p1 = Person("Ted", "Neward", 47)
+print(if (p1.firstName == "Ted") "." else "!")
+p1.age = 48
+print(if (p1.debugString == "[Person firstName:Ted lastName:Neward age:48]") "." else "!")
+println("")
+
+print("Money tests: ")
+val tenUSD = Money(10, "USD")
+val twelveUSD = Money(12, "USD")
+val fiveGBP = Money(5, "GBP")
+val fifteenEUR = Money(15, "EUR")
+val fifteenCAN = Money(15, "CAN")
+val convert_tests = listOf(
+        Pair(tenUSD, tenUSD),
+        Pair(tenUSD, fiveGBP),
+        Pair(tenUSD, fifteenEUR),
+        Pair(twelveUSD, fifteenCAN),
+        Pair(fiveGBP, tenUSD),
+        Pair(fiveGBP, fifteenEUR)
+)
+for ( (from,to) in convert_tests) {
+    print(if (from.convert(to.currency).amount == to.amount) "." else "!")
+}
 //val moneyadd_tests = listOf(
-//    Pair(tenUSD, tenUSD) to Money(20, "USD"),
-//    Pair(tenUSD, fiveGBP) to Money(20, "USD"),
-//    Pair(fiveGBP, tenUSD) to Money(10, "GBP")
+//        Pair(tenUSD, tenUSD) to Money(20, "USD"),
+//        Pair(tenUSD, fiveGBP) to Money(20, "USD"),
+//        Pair(fiveGBP, tenUSD) to Money(10, "GBP")
 //)
 //for ( (pair, result) in moneyadd_tests) {
 //    print(if ((pair.first + pair.second).amount == result.amount &&
-//              (pair.first + pair.second).currency == result.currency) "." else "!")
+//            (pair.first + pair.second).currency == result.currency) "." else "!")
 //}
 //println("")
