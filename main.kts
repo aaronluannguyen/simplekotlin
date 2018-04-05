@@ -17,7 +17,7 @@ fun whenFn(arg: Any): String {
 }
 
 // write an "add" function that takes two Ints, returns an Int, and adds the values
-fun add(int1: Int, int2: Int)
+val add = {int1: Int, int2: Int -> (int1 + int2)}
 
 // write a "sub" function that takes two Ints, returns an Int, and subtracts the values
 // write a "mathOp" function that takes two Ints and a function (that takes two Ints and returns an Int), returns an Int, and applies the passed-in-function to the arguments
@@ -44,18 +44,18 @@ for ((k,v) in when_tests) {
 }
 println("")
 
-//print("Add tests: ")
-//val add_tests = listOf(
-//    Pair(0, 0) to 0,
-//    Pair(1, 2) to 3,
-//    Pair(-2, 2) to 0,
-//    Pair(123, 456) to 579
-//)
-//for ( (k,v) in add_tests) {
-//    print(if (add(k.first, k.second) == v) "." else "!")
-//}
-//println("")
-//
+print("Add tests: ")
+val add_tests = listOf(
+    Pair(0, 0) to 0,
+    Pair(1, 2) to 3,
+    Pair(-2, 2) to 0,
+    Pair(123, 456) to 579
+)
+for ( (k,v) in add_tests) {
+    print(if (add(k.first, k.second) == v) "." else "!")
+}
+println("")
+
 //print("Sub tests: ")
 //val sub_tests = listOf(
 //    Pair(0, 0) to 0,
